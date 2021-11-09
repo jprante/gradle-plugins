@@ -1,0 +1,14 @@
+data
+work
+logs
+build
+target
+/.idea
+.DS_Store
+*.iml
+/.settings
+/.classpath
+/.project
+/.gradle
+*~
+*.orig

@@ -1,0 +1,81 @@
+= Gradle Plugin for Docker
+
+This repository provides a Gradle plugin for working with Docker.
+
+The plugin contains tasks for building and pushing
+images based on a simple configuration block that specifies the container
+name, the `Dockerfile`, task dependencies, and any additional file resources
+required for the Docker build; tasks for populating placeholders in a
+docker-compose template file with image versions resolved from
+dependencies; and tasks for starting, stopping, and cleaning
+up a named container based on a specified image
+
+== Documentation
+
+=== Tasks
+
+There are two task types
+
+* `DockerBuildTask` : task type for building a docker image
+* `DockerPushTask` : task type for pushing a docker image
+
+Apply the plugin using standard gradle convention:
+
+[source]
+----
+plugins {
+    id 'org.xbib.gradle.plugin.docker' version '<version>'
+}
+----
+
+=== Extensions
+
+The extension with name `docker` has the following attributes:
+
+- `enabled` if the task is enabled or not, default is `true`
+- `executableName` the executable name of the docker binary, default is `docker`
+- `registry` the DNS name of the registry, default is empty
+- `imageName` the docker image name, default is empty
+- `tag` the docker image tag, default is empty (which means `latest` in docker terminology)
+
+[source]
+----
+docker {
+   enabled = true
+   registry = 'myhost.mydomain'
+   imageName = 'myimage'
+   tag = 'mytag'
+}
+----
+
+=== Build a Docker image
+
+To build a docker image, run a task with type `DockerBuildTask`.
+
+==== Example
+
+[source]
+----
+plugins {
+  id 'distribution'
+  id 'org.xbib.gradle.plugin.docker'
+}
+
+task buildDockerImage(type: DockerBuildTask, group: 'docker') {
+    registry = 'hub.docker.com'
+    imageName = 'username/my-app'
+    tag =  'mytag'
+    dockerfile {
+        add(tasks.distTar.outputs.files.singleFile, '/')
+    }
+}
+----
+
+=== Push a Docker image
+
+To push an image to a docker image repository, run a task with tyep `DockerPushTask`
+
+
+== License
+
+This plugin is made available under the http://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License].

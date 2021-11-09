@@ -1,0 +1,6 @@
+
+This work is derived from
+
+https://github.com/Itiviti/gradle-docker-build-plugin
+
+(Apache License 2.0)

@@ -1,0 +1,65 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'com.gradle.plugin-publish' version '0.17.0'
+}
+
+ext {
+    user = 'jprante'
+    name = 'gradle-plugin-docker'
+    description = 'Docker support in a Gradle plugin'
+    inceptionYear = '2016'
+    url = 'https://github.com/' + user + '/' + name
+    scmUrl = 'https://github.com/' + user + '/' + name
+    scmConnection = 'scm:git:git://github.com/' + user + '/' + name + '.git'
+    scmDeveloperConnection = 'scm:git:ssh://git@github.com:' + user + '/' + name + '.git'
+    issueManagementSystem = 'Github'
+    issueManagementUrl = ext.scmUrl + '/issues'
+    licenseName = 'The Apache License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+}
+
+dependencies {
+    api gradleApi()
+    implementation "org.codehaus.groovy:groovy-all:${project.property('groovy.version')}"
+    testImplementation gradleTestKit()
+}
+
+compileGroovy {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileTestGroovy {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+validatePlugins {
+    failOnWarning = false
+}
+
+gradlePlugin {
+    plugins {
+        dockerPlugin {
+            id = 'org.xbib.gradle.plugin.docker'
+            implementationClass = 'org.xbib.gradle.plugin.docker.DockerPlugin'
+        }
+    }
+}
+
+if (project.hasProperty('gradle.publish.key')) {
+  pluginBundle {
+    website = 'https://github.com/jprante/gradle-plugin-docker'
+    vcsUrl = 'https://github.com/jprante/gradle-plugin-docker'
+    plugins {
+        dockerPlugin {
+            id = 'org.xbib.gradle.plugin.docker'
+            version = project.version
+            description = rootProject.ext.description
+            displayName = 'Gradle Docker Plugin'
+            tags = ['gradle', 'docker']
+        }
+    }
+  }
+}
