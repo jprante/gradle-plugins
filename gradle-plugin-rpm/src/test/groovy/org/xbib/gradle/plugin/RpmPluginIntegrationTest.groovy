@@ -35,10 +35,6 @@ plugins {
     id 'org.xbib.gradle.plugin.rpm'
 }
 
-rpm {
-  enabled = true
-}
-
 task myRpm(type: Rpm) {
     packageName = 'rpmIsUpToDate'
     arch = org.xbib.rpm.lead.Architecture.NOARCH

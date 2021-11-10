@@ -24,24 +24,21 @@ class RpmCopyAction implements CopyAction {
 
     Rpm task
 
-    RpmExtension ext
-
     RpmBuilder builder
 
     Path tempDir
 
-    RpmCopyAction(Project project, RpmExtension rpmExtension, Rpm task) {
+    RpmCopyAction(Project project, Rpm task) {
         this.project = project
         this.task = task
-        this.ext = rpmExtension
     }
 
     @Override
     WorkResult execute(CopyActionProcessingStream copyActionProcessingStream) {
-        if (ext.enabled) {
+        if (task.enabled) {
             task.setDuplicatesStrategy(DuplicatesStrategy.INCLUDE)
             tempDir = task.getTemporaryDir().toPath()
-            this.builder = createRpm()
+            builder = createRpm()
             copyActionProcessingStream.process(new StreamAction())
             addOther()
             buildRpm()
@@ -51,18 +48,18 @@ class RpmCopyAction implements CopyAction {
 
     RpmBuilder createRpm() {
         RpmBuilder builder = new RpmBuilder()
-        builder.setPackage ext.packageName, ext.packageVersion, ext.packageRelease, ext.epoch
-        builder.setType ext.packageType
-        builder.setPlatform ext.arch, ext.os
-        builder.setGroup ext.packageGroup
-        builder.setBuildHost ext.buildHost
-        builder.setSummary ext.summary
-        builder.setDescription ext.packageDescription
-        builder.setLicense ext.license
-        builder.setPackager ext.packager
-        builder.setDistribution ext.distribution
-        builder.setVendor ext.vendor
-        builder.setUrl ext.url
+        builder.setPackage task.packageName, task.packageVersion, task.packageRelease, task.epoch
+        builder.setType task.packageType
+        builder.setPlatform task.arch, task.os
+        builder.setGroup task.packageGroup
+        builder.setBuildHost task.buildHost
+        builder.setSummary task.summary
+        builder.setDescription task.packageDescription
+        builder.setLicense task.license
+        builder.setPackager task.packager
+        builder.setDistribution task.distribution
+        builder.setVendor task.vendor
+        builder.setUrl task.url
         builder.setPrefixes task.prefixes
         builder.setPrivateKeyId task.getSigningKeyId()
         builder.setPrivateKeyPassphrase task.getSigningKeyPassphrase()
@@ -126,7 +123,7 @@ class RpmCopyAction implements CopyAction {
 
         @Override
         void processFile(FileCopyDetailsInternal fileCopyDetailsInternal) {
-            boolean addParents = ext.addParentDirs != null ? ext.addParentDirs : task.addParentDirs
+            boolean addParents = task.addParentDirs != null ? task.addParentDirs : task.addParentDirs
             Path path = extractPath(tempDir, fileCopyDetailsInternal)
             String p = "/${fileCopyDetailsInternal.path}"
             if (Files.isSymbolicLink(path)) {
@@ -134,9 +131,9 @@ class RpmCopyAction implements CopyAction {
             } else if (!fileCopyDetailsInternal.isDirectory()) {
                 int mode = fileCopyDetailsInternal.mode
                 int dirmode = -1
-                EnumSet<Directive> directive = makeDirective(ext.fileType)
-                String user = ext.user ?: task.user
-                String group = ext.group ?: task.group
+                EnumSet<Directive> directive = makeDirective(task.fileType)
+                String user = task.user ?: task.user
+                String group = task.group ?: task.group
                 builder.addFile(p, path, mode, dirmode, directive, user, group, addParents)
             }
         }

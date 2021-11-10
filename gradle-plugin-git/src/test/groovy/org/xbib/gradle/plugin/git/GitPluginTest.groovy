@@ -10,11 +10,13 @@ import org.xbib.groovy.git.Git
 import spock.lang.Specification
 
 class GitPluginTest extends Specification {
-    @Rule TemporaryFolder tempDir = new TemporaryFolder()
+    @Rule TemporaryFolder tempDir
     File projectDir
     File buildFile
 
     def setup() {
+        tempDir = new TemporaryFolder()
+        tempDir.create()
         projectDir = tempDir.newFolder('project')
         buildFile = projectFile('build.gradle')
     }

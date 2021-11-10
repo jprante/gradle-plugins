@@ -162,7 +162,7 @@ class RpmFullTest {
             packageRelease = '1'
             with customCopySpec
         })
-        project.tasks.buildRpm.copy()
+        project.tasks.buildRpm.copy() // run task
         RpmReader rpmReader = new RpmReader()
         RpmReaderResult result = rpmReader.read(project.tasks.buildRpm.outputs.files.first().toPath())
         assertThat(result.files*.name, is(['./lib/apple']))
