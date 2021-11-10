@@ -8,12 +8,13 @@ import java.util.concurrent.Callable
 
 class Rpm extends AbstractArchiveTask {
 
-    @Delegate
+    @Delegate(methodAnnotations = true)
     @Nested
     RpmExtension rpmExtension
 
     Rpm() {
-        rpmExtension = project.extensions.findByName('rpm') as RpmExtension
+        super()
+        rpmExtension = project.extensions.findByType(RpmExtension) as RpmExtension
         getArchiveExtension().set("rpm")
         Callable<String> archiveFileNameProvider = new Callable<String>() {
             @Override

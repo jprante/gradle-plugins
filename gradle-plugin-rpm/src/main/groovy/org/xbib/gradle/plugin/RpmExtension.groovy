@@ -1,6 +1,7 @@
 package org.xbib.gradle.plugin
 
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.xbib.rpm.Dependency
 import org.xbib.rpm.Directory
@@ -13,7 +14,7 @@ class RpmExtension {
 
     @Optional
     @Input
-    boolean enabled = true
+    Boolean enabled = true
 
     @Optional
     @Input
@@ -115,6 +116,7 @@ class RpmExtension {
     @Input
     PackageType packageType = PackageType.BINARY
 
+    @Optional
     @Input
     List<String> prefixes = new ArrayList<String>()
 
@@ -143,9 +145,10 @@ class RpmExtension {
     String preInstall
 
     @Optional
-    @Input
+    @InputFile
     File preInstallFile
 
+    @Optional
     @Input
     List<Object> preInstallCommands = []
 
@@ -154,9 +157,10 @@ class RpmExtension {
     String postInstall
 
     @Optional
-    @Input
+    @InputFile
     File postInstallFile
 
+    @Optional
     @Input
     List<Object> postInstallCommands = []
 
@@ -165,9 +169,10 @@ class RpmExtension {
     String preUninstall
 
     @Optional
-    @Input
+    @InputFile
     File preUninstallFile
 
+    @Optional
     @Input
     List<Object> preUninstallCommands = []
 
@@ -176,9 +181,10 @@ class RpmExtension {
     String postUninstall
 
     @Optional
-    @Input
+    @InputFile
     File postUninstallFile
 
+    @Optional
     @Input
     List<Object> postUninstallCommands = []
 
@@ -187,9 +193,10 @@ class RpmExtension {
     String preTrans
 
     @Optional
-    @Input
+    @InputFile
     File preTransFile
 
+    @Optional
     @Input
     List<Object> preTransCommands = []
 
@@ -198,17 +205,78 @@ class RpmExtension {
     String postTrans
 
     @Optional
-    @Input
+    @InputFile
     File postTransFile
 
+    @Optional
+    @Input
+    List<Directory> directories = []
+
+    @Optional
+    @InputFile
+    File changeLogFile
+
+    @Optional
+    @Input
+    String changeLog
+
+    @Optional
     @Input
     List<Object> postTransCommands = []
 
+    @Optional
     @Input
     List<Object> commonCommands = []
 
+    @Optional
     @Input
     List<Link> links = []
+
+    @Optional
+    @Input
+    List<Dependency> dependencies = []
+
+    @Optional
+    @Input
+    List<Dependency> obsoletes = []
+
+    @Optional
+    @Input
+    List<Dependency> conflicts = []
+
+    @Optional
+    @Input
+    List<Dependency> recommends = []
+
+    @Optional
+    @Input
+    List<Dependency> suggests = []
+
+    @Optional
+    @Input
+    List<Dependency> enhances = []
+
+    @Optional
+    @Input
+    List<Dependency> preDepends = []
+
+    @Optional
+    @Input
+    List<Dependency> breaks = []
+
+    @Optional
+    @Input
+    List<Dependency> replaces = []
+
+    @Optional
+    @Input
+    List<Dependency> provides = []
+
+    Directory directory(String path) {
+        Directory directory = new Directory(path: path)
+        directories << directory
+        directory
+    }
 
     Link link(String path, String target) {
         link(path, target, -1)
@@ -219,36 +287,6 @@ class RpmExtension {
         links.add(link)
         link
     }
-
-    @Input
-    List<Dependency> dependencies = []
-
-    @Input
-    List<Dependency> obsoletes = []
-
-    @Input
-    List<Dependency> conflicts = []
-
-    @Input
-    List<Dependency> recommends = []
-
-    @Input
-    List<Dependency> suggests = []
-
-    @Input
-    List<Dependency> enhances = []
-
-    @Input
-    List<Dependency> preDepends = []
-
-    @Input
-    List<Dependency> breaks = []
-
-    @Input
-    List<Dependency> replaces = []
-
-    @Input
-    List<Dependency> provides = []
 
     Dependency requires(String packageName) {
         requires(packageName, '')
@@ -389,21 +427,4 @@ class RpmExtension {
         provides.add(dep)
         dep
     }
-
-    @Input
-    List<Directory> directories = []
-
-    Directory directory(String path) {
-        Directory directory = new Directory(path: path)
-        directories << directory
-        directory
-    }
-
-    @Optional
-    @Input
-    File changeLogFile
-
-    @Optional
-    @Input
-    String changeLog
 }
