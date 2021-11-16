@@ -1,7 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'
-    id 'com.gradle.plugin-publish' version '0.17.0'
+    id 'com.gradle.plugin-publish' version '0.18.0'
 }
 
 apply plugin: 'groovy'
@@ -26,10 +26,6 @@ compileTestGroovy {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-validatePlugins {
-    failOnWarning = false
-}
-
 gradlePlugin {
     plugins {
         gitPlugin {
@@ -41,6 +37,11 @@ gradlePlugin {
 
 if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
+        mavenCoordinates {
+            groupId = "org.xbib.gradle.plugin"
+            artifactId = "gradle-plugin-git"
+            version = project.version
+        }
         website = 'https://github.com/jprante/gradle-plugins'
         vcsUrl = 'https://github.com/jprante/gradle-plugins'
         plugins {
@@ -49,7 +50,7 @@ if (project.hasProperty('gradle.publish.key')) {
                 version = project.version
                 description = 'Git client plugin based on JGit'
                 displayName = 'Git client plugin based on JGit'
-                tags = ['gradle', 'plugin', 'git']
+                tags = ['git']
             }
         }
     }
