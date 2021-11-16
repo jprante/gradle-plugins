@@ -41,14 +41,14 @@ gradlePlugin {
 
 if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
-        website = 'https://github.com/jprante/groovy-git'
-        vcsUrl = 'https://github.com/jprante/groovy-git.git'
+        website = 'https://github.com/jprante/gradle-plugins'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins'
         plugins {
             gitPlugin {
                 id = 'org.xbib.gradle.plugin.git'
                 version = project.version
-                description = rootProject.ext.description
-                displayName = rootProject.ext.description
+                description = 'Git client plugin based on JGit'
+                displayName = 'Git client plugin based on JGit'
                 tags = ['gradle', 'plugin', 'git']
             }
         }

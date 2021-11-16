@@ -50,14 +50,14 @@ gradlePlugin {
 
 if (project.hasProperty('gradle.publish.key')) {
   pluginBundle {
-    website = 'https://github.com/jprante/gradle-plugin-docker'
-    vcsUrl = 'https://github.com/jprante/gradle-plugin-docker'
+    website = 'https://github.com/jprante/gradle-plugins'
+    vcsUrl = 'https://github.com/jprante/gradle-plugins'
     plugins {
         dockerPlugin {
             id = 'org.xbib.gradle.plugin.docker'
             version = project.version
-            description = rootProject.ext.description
-            displayName = 'Gradle Docker Plugin'
+            description = 'Docker plugin for build and push by Dockerfile'
+            displayName = 'Docker Plugin for build and push by Dockerfile'
             tags = ['gradle', 'docker']
         }
     }
