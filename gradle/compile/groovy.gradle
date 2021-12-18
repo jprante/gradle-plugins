@@ -21,7 +21,13 @@ tasks.withType(GroovyCompile) {
     }
 }
 
-task groovydocJar(type: Jar, dependsOn: 'groovydoc') {
+task groovydocJar(type: Jar) {
+    dependsOn groovydoc
     from groovydoc.destinationDir
-    archiveClassifier.set('javadoc')
+    archiveClassifier.set('groovydoc')
+}
+tasks.assemble.dependsOn(tasks.groovydocJar)
+
+artifacts {
+    archives groovydocJar
 }

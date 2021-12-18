@@ -10,7 +10,7 @@ apply plugin: 'com.gradle.plugin-publish'
 
 dependencies {
     api gradleApi()
-    api "org.xbib:groovy-git:${project.property('groovy-git.version')}"
+    api "org.xbib.groovy:groovy-git:${project.property('groovy-git.version')}"
     testImplementation gradleTestKit()
     testImplementation "org.spockframework:spock-core:${project.property('spock.version')}"
     testImplementation "junit:junit:${project.property('junit4.version')}"
