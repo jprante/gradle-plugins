@@ -8,7 +8,6 @@ dependencies {
     asciidoclet "org.asciidoctor:asciidoclet:${project.property('asciidoclet.version')}"
 }
 
-
 asciidoctor {
     backends 'html5'
     outputDir = file("${rootProject.projectDir}/docs")

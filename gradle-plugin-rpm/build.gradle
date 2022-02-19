@@ -1,6 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '0.18.0'
+    alias(libs.plugins.publish)
 }
 
 apply plugin: 'java-gradle-plugin'
@@ -10,18 +10,8 @@ apply from: rootProject.file('gradle/compile/groovy.gradle')
 
 dependencies {
     api gradleApi()
-    api "org.xbib:rpm-core:${project.property('rpm.version')}"
+    api libs.rpm
     testImplementation gradleTestKit()
-}
-
-compileGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-compileTestGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }
 
 gradlePlugin {

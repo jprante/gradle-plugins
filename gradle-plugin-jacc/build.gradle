@@ -1,0 +1,41 @@
+plugins {
+    id 'java-gradle-plugin'
+    alias(libs.plugins.publish)
+}
+
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'com.gradle.plugin-publish'
+
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+apply from: rootProject.file('gradle/test/junit5.gradle')
+
+dependencies {
+    api gradleApi()
+    implementation libs.jacc
+    testImplementation gradleTestKit()
+}
+
+gradlePlugin {
+    plugins {
+        jaccPlugin {
+            id = 'org.xbib.gradle.plugin.jacc'
+            implementationClass = 'org.xbib.gradle.plugin.jacc.JaccPlugin'
+        }
+    }
+}
+
+if (project.hasProperty('gradle.publish.key')) {
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        plugins {
+            jaccPlugin {
+                id = 'org.xbib.gradle.plugin.jacc'
+                version = project.version
+                description = 'Gradle Jacc plugin'
+                displayName = 'Gradle Jacc plugin'
+                tags = ['jacc']
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 
 dependencies {
-    implementation "org.codehaus.groovy:groovy:${project.property('groovy.version')}"
+    implementation libs.groovy.core
 }
 
 compileGroovy {
@@ -17,7 +17,7 @@ compileTestGroovy {
 tasks.withType(GroovyCompile) {
     options.compilerArgs
     if (!options.compilerArgs.contains("-processor")) {
-        options.compilerArgs << '-proc:none'
+        options.compilerArgs.add('-proc:none')
     }
 }
 
@@ -27,7 +27,3 @@ task groovydocJar(type: Jar) {
     archiveClassifier.set('groovydoc')
 }
 tasks.assemble.dependsOn(tasks.groovydocJar)
-
-artifacts {
-    archives groovydocJar
-}

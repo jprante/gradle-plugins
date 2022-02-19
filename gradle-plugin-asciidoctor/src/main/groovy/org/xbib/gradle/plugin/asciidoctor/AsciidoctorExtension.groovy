@@ -4,7 +4,7 @@ import org.gradle.api.Project
 
 class AsciidoctorExtension {
 
-    String version = '2.5.3'
+    String version = '2.5.2'
 
     boolean addDefaultRepositories = true
 

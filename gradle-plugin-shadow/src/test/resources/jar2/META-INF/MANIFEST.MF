@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: 1.5.0_16 (Apple Computer, Inc.)
+Built-By: Cy
+Build-Jdk: 1.5.0_16
+Implementation-Title: Commons Compress
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Implementation-Version: 1.0
+Specification-Title: Commons Compress
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 1.0
+X-Compile-Source-JDK: 1.4
+X-Compile-Target-JDK: 1.4
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Import-Package: org.apache.commons.compress.archivers;version="1.0",or
+ g.apache.commons.compress.archivers.ar;version="1.0",org.apache.commo
+ ns.compress.archivers.cpio;version="1.0",org.apache.commons.compress.
+ archivers.jar;version="1.0",org.apache.commons.compress.archivers.tar
+ ;version="1.0",org.apache.commons.compress.archivers.zip;version="1.0
+ ",org.apache.commons.compress.changes;version="1.0",org.apache.common
+ s.compress.compressors;version="1.0",org.apache.commons.compress.comp
+ ressors.bzip2;version="1.0",org.apache.commons.compress.compressors.g
+ zip;version="1.0",org.apache.commons.compress.utils;version="1.0"
+Bnd-LastModified: 1242279163045
+Export-Package: org.apache.commons.compress.archivers;version="1.0",or
+ g.apache.commons.compress.changes;version="1.0",org.apache.commons.co
+ mpress.utils;version="1.0",org.apache.commons.compress.archivers.ar;v
+ ersion="1.0",org.apache.commons.compress.compressors.gzip;version="1.
+ 0",org.apache.commons.compress.archivers.jar;version="1.0",org.apache
+ .commons.compress.archivers.tar;version="1.0",org.apache.commons.comp
+ ress.archivers.zip;version="1.0",org.apache.commons.compress.compress
+ ors;version="1.0",org.apache.commons.compress.archivers.cpio;version=
+ "1.0",org.apache.commons.compress.compressors.bzip2;version="1.0"
+Bundle-Version: 1.0
+Bundle-Description: Commons Compress is a component that contains Ar, 
+ Cpio, Jar, Tar, Zip and BZip2 packages
+Bundle-Name: Commons Compress
+Bundle-DocURL: http://commons.apache.org/compress/
+Bundle-ManifestVersion: 2
+Bundle-Vendor: The Apache Software Foundation
+Bundle-SymbolicName: org.apache.commons.compress
+Tool: Bnd-0.0.238
+
