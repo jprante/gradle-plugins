@@ -2,14 +2,14 @@
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
-            version('gradle', '7.4')
+            version('gradle', '7.4.2')
             version('groovy', '3.0.9')
             version('spock', '2.0-groovy-3.0')
             version('asm', '9.2')
             version('junit', '5.8.2')
             library('groovy-core', 'org.codehaus.groovy', 'groovy').versionRef('groovy')
             library('groovy-git', 'org.xbib.groovy:groovy-git:2.1.0')
-            library('rpm', 'org.xbib:rpm-core:2.1.0')
+            library('rpm', 'org.xbib:rpm-core:2.2.0')
             library('spock-core', 'org.spockframework', 'spock-core').versionRef('spock')
             library('spock-junit4', 'org.spockframework', 'spock-junit4').versionRef('spock')
             library('asm', 'org.ow2.asm', 'asm').versionRef('asm')
