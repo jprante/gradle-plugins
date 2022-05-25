@@ -1,7 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'
-    id 'com.gradle.plugin-publish' version '0.17.0'
+    id 'com.gradle.plugin-publish' version '1.0.0-rc-2'
 }
 
 apply plugin: 'groovy'
@@ -29,26 +29,20 @@ validatePlugins {
   failOnWarning = false
 }
 
-gradlePlugin {
-    plugins {
-        rpmPlugin {
-            id = 'org.xbib.gradle.plugin.rpm'
-            implementationClass = 'org.xbib.gradle.plugin.RpmPlugin'
-        }
-    }
-}
-
 if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
-        website = 'https://github.com/jprante/rpm'
-        vcsUrl = 'https://github.com/jprante/rpm'
+        website = 'https://github.com/jprante/gradle-plugins/gradle-plugin-rpm'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins/'
+        tags = ['rpm']
+    }
+    gradlePlugin {
         plugins {
             rpmPlugin {
                 id = 'org.xbib.gradle.plugin.rpm'
                 version = project.version
                 description = rootProject.ext.description
                 displayName = rootProject.ext.description
-                tags = ['gradle', 'plugin', 'rpm']
+                implementationClass = 'org.xbib.gradle.plugin.RpmPlugin'
             }
         }
     }

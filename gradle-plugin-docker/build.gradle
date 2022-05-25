@@ -58,7 +58,7 @@ if (project.hasProperty('gradle.publish.key')) {
             version = project.version
             description = rootProject.ext.description
             displayName = 'Gradle Docker Plugin'
-            tags = ['gradle', 'docker']
+            tags = ['docker']
         }
     }
   }
