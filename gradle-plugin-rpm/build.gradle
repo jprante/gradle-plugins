@@ -1,48 +1,44 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'groovy'
-    id 'com.gradle.plugin-publish' version '1.0.0-rc-2'
+    alias(libs.plugins.publish)
 }
 
-apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'com.gradle.plugin-publish'
 
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+
 dependencies {
     api gradleApi()
-    api "org.xbib:rpm-core:${project.property('rpm.version')}"
+    api libs.rpm
     testImplementation gradleTestKit()
 }
 
-compileGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-compileTestGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-validatePlugins {
-    // disable warning as failures because gradle plugin does not recognize @Delegate tag
-  failOnWarning = false
+gradlePlugin {
+    plugins {
+        rpmPlugin {
+            id = 'org.xbib.gradle.plugin.rpm'
+            implementationClass = 'org.xbib.gradle.plugin.RpmPlugin'
+        }
+    }
 }
 
 if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
-        website = 'https://github.com/jprante/gradle-plugins/gradle-plugin-rpm'
-        vcsUrl = 'https://github.com/jprante/gradle-plugins/'
-        tags = ['rpm']
-    }
-    gradlePlugin {
+        mavenCoordinates {
+            groupId = "org.xbib.gradle.plugin"
+            artifactId = "gradle-plugin-rpm"
+            version = project.version
+        }
+        website = 'https://github.com/jprante/gradle-plugins'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins'
         plugins {
             rpmPlugin {
                 id = 'org.xbib.gradle.plugin.rpm'
                 version = project.version
-                description = rootProject.ext.description
-                displayName = rootProject.ext.description
-                implementationClass = 'org.xbib.gradle.plugin.RpmPlugin'
+                description = 'Java implementation for RPM packaging'
+                displayName = 'Java implementation for RPM packaging'
+                tags = [ 'rpm' ]
             }
         }
     }

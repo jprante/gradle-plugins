@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 
 dependencies {
-    implementation "org.codehaus.groovy:groovy:${project.property('groovy.version')}:indy"
+    implementation libs.groovy.core
 }
 
 compileGroovy {
@@ -17,18 +17,13 @@ compileTestGroovy {
 tasks.withType(GroovyCompile) {
     options.compilerArgs
     if (!options.compilerArgs.contains("-processor")) {
-        options.compilerArgs << '-proc:none'
+        options.compilerArgs.add('-proc:none')
     }
-    groovyOptions.optimizationOptions.indy = true
 }
 
-task groovydocJar(type: Jar, dependsOn: 'groovydoc') {
+task groovydocJar(type: Jar) {
+    dependsOn groovydoc
     from groovydoc.destinationDir
-    archiveClassifier.set('javadoc')
+    archiveClassifier.set('groovydoc')
 }
-
-configurations.all {
-    resolutionStrategy {
-        force "org.codehaus.groovy:groovy:${project.property('groovy.version')}:indy"
-    }
-}
+tasks.assemble.dependsOn(tasks.groovydocJar)

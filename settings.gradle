@@ -1,3 +1,39 @@
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('gradle', '7.4')
+            version('groovy', '3.0.9')
+            version('spock', '2.0-groovy-3.0')
+            version('asm', '9.2')
+            version('junit', '5.8.2')
+            library('groovy-core', 'org.codehaus.groovy', 'groovy').versionRef('groovy')
+            library('groovy-git', 'org.xbib.groovy:groovy-git:2.1.0')
+            library('rpm', 'org.xbib:rpm-core:2.1.0')
+            library('spock-core', 'org.spockframework', 'spock-core').versionRef('spock')
+            library('spock-junit4', 'org.spockframework', 'spock-junit4').versionRef('spock')
+            library('asm', 'org.ow2.asm', 'asm').versionRef('asm')
+            library('asm-commons', 'org.ow2.asm', 'asm-commons').versionRef('asm')
+            library('asm-util', 'org.ow2.asm', 'asm-util').versionRef('asm')
+            library('junit-jupiter-api', 'org.junit.jupiter', 'junit-jupiter-api').versionRef('junit')
+            library('junit-jupiter-params', 'org.junit.jupiter', 'junit-jupiter-params').versionRef('junit')
+            library('junit-jupiter-engine', 'org.junit.jupiter', 'junit-jupiter-engine').versionRef('junit')
+            library('hamcrest', 'org.hamcrest:hamcrest-library:2.2')
+            library('junit4', 'junit:junit:4.13.2')
+            library('asciidoctorj', 'org.asciidoctor:asciidoctorj:2.5.2')
+            library('jruby', 'org.jruby:jruby:9.3.2.0')
+            library('jsoup', 'org.jsoup:jsoup:1.11.2')
+            library('jflex', 'de.jflex:jflex:1.8.2')
+            library('jacc', 'org.xbib:jacc:2.2.0')
+            plugin('publish', 'com.gradle.plugin-publish').version('0.18.0')
+        }
+    }
+}
+
 include 'gradle-plugin-git'
 include 'gradle-plugin-rpm'
 include 'gradle-plugin-docker'
+include 'gradle-plugin-asciidoctor'
+include 'gradle-plugin-jacc'
+include 'gradle-plugin-jflex'
+include 'gradle-plugin-shadow'

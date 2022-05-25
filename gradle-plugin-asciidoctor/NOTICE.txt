@@ -1,0 +1,10 @@
+
+This work is based on an old (before June 2018) 1.5.6 version of
+
+https://github.com/asciidoctor/asciidoctor-gradle-plugin
+
+You can find remnants in the official code under org.asciidoctor.gradle.compat, when it was created with
+
+https://github.com/ysb33r/asciidoctor-gradle-plugin/commit/1ad29b2eba915f7bce3cb004e3e9582578c8ac72
+
+License: Apache 2.0

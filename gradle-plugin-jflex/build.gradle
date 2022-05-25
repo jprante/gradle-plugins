@@ -1,0 +1,41 @@
+plugins {
+    id 'java-gradle-plugin'
+    alias(libs.plugins.publish)
+}
+
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'com.gradle.plugin-publish'
+
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+apply from: rootProject.file('gradle/test/junit5.gradle')
+
+dependencies {
+    api gradleApi()
+    implementation libs.jflex
+    testImplementation gradleTestKit()
+}
+
+gradlePlugin {
+    plugins {
+        jflexPlugin {
+            id = 'org.xbib.gradle.plugin.jflex'
+            implementationClass = 'org.xbib.gradle.plugin.jflex.JFlexPlugin'
+        }
+    }
+}
+
+if (project.hasProperty('gradle.publish.key')) {
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        plugins {
+            jflexPlugin {
+                id = 'org.xbib.gradle.plugin.jflex'
+                version = project.version
+                description = 'Gradle JFlex plugin'
+                displayName = 'Gradle JFlex plugin'
+                tags = ['jflex']
+            }
+        }
+    }
+}

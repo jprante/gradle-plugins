@@ -1,0 +1,47 @@
+plugins {
+    id 'java-gradle-plugin'
+    alias(libs.plugins.publish)
+}
+
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'com.gradle.plugin-publish'
+
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+
+dependencies {
+    api gradleApi()
+    implementation libs.asciidoctorj
+    implementation libs.jruby
+    testImplementation  libs.spock.core
+    testImplementation libs.jsoup
+}
+
+gradlePlugin {
+    plugins {
+        asciidoctorPlugin {
+            id = 'org.xbib.gradle.plugin.asciidoctor'
+            implementationClass = 'org.xbib.gradle.plugin.asciidoctor.AsciidoctorPlugin'
+        }
+    }
+}
+
+if (project.hasProperty('gradle.publish.key')) {
+    pluginBundle {
+        mavenCoordinates {
+            groupId = "org.xbib.gradle.plugin"
+            artifactId = "gradle-plugin-asciidoctor"
+            version = project.version
+        }
+        website = 'https://github.com/jprante/gradle-plugins'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins'
+        plugins {
+            asciidoctorPlugin {
+                id = 'org.xbib.gradle.plugin.asciidoctor'
+                version = project.version
+                description = 'Asciidoctor plugin for building documentations'
+                displayName = 'Asciidoctor plugin for building documentations'
+                tags = ['asciidoctor']
+            }
+        }
+    }
+}

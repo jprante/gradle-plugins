@@ -1,0 +1,45 @@
+plugins {
+    id 'java-gradle-plugin'
+    alias(libs.plugins.publish)
+}
+
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'com.gradle.plugin-publish'
+
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+apply from: rootProject.file('gradle/test/junit5.gradle')
+
+dependencies {
+    api gradleApi()
+    implementation libs.asm
+    implementation libs.asm.commons
+    implementation libs.asm.util
+    testImplementation gradleTestKit()
+    testImplementation libs.spock.core
+    testImplementation libs.spock.junit4
+}
+
+gradlePlugin {
+    plugins {
+        shadowPlugin {
+            id = 'org.xbib.gradle.plugin.shadow'
+            implementationClass = 'org.xbib.gradle.plugin.shadow.ShadowPlugin'
+        }
+    }
+}
+
+if (project.hasProperty('gradle.publish.key')) {
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        plugins {
+            shadowPlugin {
+                id = 'org.xbib.gradle.plugin.shadow'
+                version = project.version
+                description = 'Shadow plugin for Gradle'
+                displayName = 'Shadow plugin for Gradle'
+                tags = [ 'shadow' ]
+            }
+        }
+    }
+}

@@ -1,33 +1,19 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'groovy'
-    id 'com.gradle.plugin-publish' version '0.17.0'
+    alias(libs.plugins.publish)
 }
 
-apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'com.gradle.plugin-publish'
 
+apply from: rootProject.file('gradle/compile/groovy.gradle')
+
 dependencies {
     api gradleApi()
-    api "org.xbib:groovy-git:${project.property('groovy-git.version')}"
+    api libs.groovy.git
     testImplementation gradleTestKit()
-    testImplementation "org.spockframework:spock-core:${project.property('spock.version')}"
-    testImplementation "junit:junit:${project.property('junit4.version')}"
-}
-
-compileGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-compileTestGroovy {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-validatePlugins {
-    failOnWarning = false
+    testImplementation  libs.spock.core
+    testImplementation libs.junit4
 }
 
 gradlePlugin {
@@ -41,14 +27,19 @@ gradlePlugin {
 
 if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
-        website = 'https://github.com/jprante/groovy-git'
-        vcsUrl = 'https://github.com/jprante/groovy-git.git'
+        mavenCoordinates {
+            groupId = "org.xbib.gradle.plugin"
+            artifactId = "gradle-plugin-git"
+            version = project.version
+        }
+        website = 'https://github.com/jprante/gradle-plugins'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins'
         plugins {
             gitPlugin {
                 id = 'org.xbib.gradle.plugin.git'
                 version = project.version
-                description = rootProject.ext.description
-                displayName = rootProject.ext.description
+                description = 'Git client plugin based on JGit'
+                displayName = 'Git client plugin based on JGit'
                 tags = ['git']
             }
         }

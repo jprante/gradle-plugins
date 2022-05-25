@@ -2,7 +2,7 @@
 group = 'org.xbib.gradle.plugin'
 
 wrapper {
-    gradleVersion = "${project.property('gradle.wrapper.version')}"
+    gradleVersion = libs.versions.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
 }
 

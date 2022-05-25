@@ -1,0 +1,8 @@
+
+Very loosely based on a 2018 version of nebula.rpm
+
+https://github.com/nebula-plugins/gradle-ospackage-plugin
+
+but completely revised, using the xbib rpm library, not redline rpm.
+
+Lincense: Apache 2.0
