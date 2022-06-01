@@ -16,32 +16,26 @@ dependencies {
     testImplementation libs.junit4
 }
 
-gradlePlugin {
-    plugins {
-        gitPlugin {
-            id = 'org.xbib.gradle.plugin.git'
-            implementationClass = 'org.xbib.gradle.plugin.git.GitPlugin'
-        }
-    }
-}
-
 if (project.hasProperty('gradle.publish.key')) {
-    pluginBundle {
-        mavenCoordinates {
-            groupId = "org.xbib.gradle.plugin"
-            artifactId = "gradle-plugin-git"
-            version = project.version
-        }
-        website = 'https://github.com/jprante/gradle-plugins'
-        vcsUrl = 'https://github.com/jprante/gradle-plugins'
+    gradlePlugin {
         plugins {
             gitPlugin {
                 id = 'org.xbib.gradle.plugin.git'
+                implementationClass = 'org.xbib.gradle.plugin.git.GitPlugin'
                 version = project.version
                 description = 'Git client plugin based on JGit'
                 displayName = 'Git client plugin based on JGit'
-                tags = ['git']
             }
         }
+    }
+    pluginBundle {
+        /*mavenCoordinates {
+            groupId = "org.xbib.gradle.plugin"
+            artifactId = "gradle-plugin-git"
+            version = project.version
+        }*/
+        website = 'https://github.com/jprante/gradle-plugins'
+        vcsUrl = 'https://github.com/jprante/gradle-plugins'
+        tags = ['git']
     }
 }

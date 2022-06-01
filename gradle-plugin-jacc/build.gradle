@@ -15,27 +15,21 @@ dependencies {
     testImplementation gradleTestKit()
 }
 
-gradlePlugin {
-    plugins {
-        jaccPlugin {
-            id = 'org.xbib.gradle.plugin.jacc'
-            implementationClass = 'org.xbib.gradle.plugin.jacc.JaccPlugin'
-        }
-    }
-}
-
 if (project.hasProperty('gradle.publish.key')) {
-    pluginBundle {
-        website = scmUrl
-        vcsUrl = scmUrl
+    gradlePlugin {
         plugins {
             jaccPlugin {
                 id = 'org.xbib.gradle.plugin.jacc'
+                implementationClass = 'org.xbib.gradle.plugin.jacc.JaccPlugin'
                 version = project.version
                 description = 'Gradle Jacc plugin'
                 displayName = 'Gradle Jacc plugin'
-                tags = ['jacc']
             }
         }
+    }
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        tags = ['jacc']
     }
 }

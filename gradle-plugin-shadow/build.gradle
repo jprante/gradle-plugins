@@ -19,27 +19,22 @@ dependencies {
     testImplementation libs.spock.junit4
 }
 
-gradlePlugin {
-    plugins {
-        shadowPlugin {
-            id = 'org.xbib.gradle.plugin.shadow'
-            implementationClass = 'org.xbib.gradle.plugin.shadow.ShadowPlugin'
-        }
-    }
-}
-
 if (project.hasProperty('gradle.publish.key')) {
-    pluginBundle {
-        website = scmUrl
-        vcsUrl = scmUrl
+    gradlePlugin {
         plugins {
             shadowPlugin {
                 id = 'org.xbib.gradle.plugin.shadow'
+                implementationClass = 'org.xbib.gradle.plugin.shadow.ShadowPlugin'
+                group = project.group
                 version = project.version
                 description = 'Shadow plugin for Gradle'
                 displayName = 'Shadow plugin for Gradle'
-                tags = [ 'shadow' ]
             }
         }
+    }
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        tags = [ 'shadow' ]
     }
 }

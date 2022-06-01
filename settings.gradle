@@ -25,7 +25,7 @@ dependencyResolutionManagement {
             library('jacc', 'org.xbib:jacc:2.2.0')
             library('groovy-git', 'org.xbib.groovy', 'groovy-git').version('2.1.0')
             library('rpm', 'org.xbib', 'rpm-core').version('2.2.0')
-            plugin('publish', 'com.gradle.plugin-publish').version('0.18.0')
+            plugin('publish', 'com.gradle.plugin-publish').version('1.0.0-rc-2')
         }
     }
 }

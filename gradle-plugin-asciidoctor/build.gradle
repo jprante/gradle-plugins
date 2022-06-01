@@ -16,32 +16,27 @@ dependencies {
     testImplementation libs.jsoup
 }
 
-gradlePlugin {
-    plugins {
-        asciidoctorPlugin {
-            id = 'org.xbib.gradle.plugin.asciidoctor'
-            implementationClass = 'org.xbib.gradle.plugin.asciidoctor.AsciidoctorPlugin'
+if (project.hasProperty('gradle.publish.key')) {
+    gradlePlugin {
+        plugins {
+            asciidoctorPlugin {
+                id = 'org.xbib.gradle.plugin.asciidoctor'
+                implementationClass = 'org.xbib.gradle.plugin.asciidoctor.AsciidoctorPlugin'
+                version = project.version
+                description = 'Asciidoctor plugin for building documentations'
+                displayName = 'Asciidoctor plugin for building documentations'
+            }
         }
     }
-}
-
-if (project.hasProperty('gradle.publish.key')) {
     pluginBundle {
-        mavenCoordinates {
+/*        mavenCoordinates {
             groupId = "org.xbib.gradle.plugin"
             artifactId = "gradle-plugin-asciidoctor"
             version = project.version
         }
+*/
         website = 'https://github.com/jprante/gradle-plugins'
         vcsUrl = 'https://github.com/jprante/gradle-plugins'
-        plugins {
-            asciidoctorPlugin {
-                id = 'org.xbib.gradle.plugin.asciidoctor'
-                version = project.version
-                description = 'Asciidoctor plugin for building documentations'
-                displayName = 'Asciidoctor plugin for building documentations'
-                tags = ['asciidoctor']
-            }
-        }
+        tags = ['asciidoctor']
     }
 }

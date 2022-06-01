@@ -15,27 +15,21 @@ dependencies {
     testImplementation gradleTestKit()
 }
 
-gradlePlugin {
-    plugins {
-        jflexPlugin {
-            id = 'org.xbib.gradle.plugin.jflex'
-            implementationClass = 'org.xbib.gradle.plugin.jflex.JFlexPlugin'
-        }
-    }
-}
-
 if (project.hasProperty('gradle.publish.key')) {
-    pluginBundle {
-        website = scmUrl
-        vcsUrl = scmUrl
+    gradlePlugin {
         plugins {
             jflexPlugin {
                 id = 'org.xbib.gradle.plugin.jflex'
+                implementationClass = 'org.xbib.gradle.plugin.jflex.JFlexPlugin'
                 version = project.version
                 description = 'Gradle JFlex plugin'
                 displayName = 'Gradle JFlex plugin'
-                tags = ['jflex']
             }
         }
+    }
+    pluginBundle {
+        website = scmUrl
+        vcsUrl = scmUrl
+        tags = ['jflex']
     }
 }
